@@ -1,0 +1,15 @@
+.surface {
+    lost-utility: clearfix;
+    background: url('./back1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.blank {
+    min-height: 100vh;
+    background: #70AAC3;
+}
+
+.container {
+    margin-left: 260px;
+}
