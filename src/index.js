@@ -2,9 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import Login from './login'
-import Canvas from './canvas/wrapper'
-import Settings from './settings/wrapper'
-import Agent from './agent/wrapper'
+
 import registerServiceWorker from './registerServiceWorker'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {ApolloProvider} from 'react-apollo'
@@ -37,9 +35,6 @@ ReactDOM.render(
         />
         <Route exact path='/login' component={Login} />
         <Route exact path='/' component={App} />
-        <Route exact path='/agent/:id' component={Agent} />
-        <Route exact path='/canvas/:id' component={Canvas} />
-        <Route exact path='/settings' component={Settings} />
       </div>
     </Router>
   </ApolloProvider>,

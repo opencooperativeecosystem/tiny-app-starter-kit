@@ -4,8 +4,11 @@ body {
     /* padding: 20px; */
     font-family: 'Fira Sans';
     /* lost-utility: edit;  */
+    background-color: #1E1E1E;
   }
-    
+  
+  
+
   .canvas_title {
     margin-top: 0;
     margin-left: 5px;
@@ -324,7 +327,6 @@ body {
 
 .left_section {
   lost-column: 1/2;
-  background: url('./images/bg.png');
   background-size: cover;
   min-height: 100vh;
 }

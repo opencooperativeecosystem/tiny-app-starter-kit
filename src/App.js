@@ -1,140 +1,95 @@
 import React from 'react'
 import { gql, graphql } from 'react-apollo'
 import style from './App.css'
-import { Link } from 'react-router-dom'
 import AppTemplate from './templates/AppTemplate'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import Feed from './components/feed/feed'
-import Card from './components/card'
-
-
-const sde = [
-  {
-    due: "29 feb 2018",
-    note: "process example description",
-    title: "process example",
-    outputs: [{resourceClassifiedAs: {name: "ciccio"}}, {resourceClassifiedAs: {name: "ciccio"}}],
-    cards: [
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [{image: "https://picsum.photos/100"},{image: "https://picsum.photos/200"}],
-        due: "20 feb 2019"
-      },
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [],
-        due: "20 feb 2019"
-      }
-  ]
-  },
-  {
-    due: "29 feb 2018",
-    note: "process example description",
-    title: "process example",
-    outputs: [{resourceClassifiedAs: {name: "ciccio"}}, {resourceClassifiedAs: {name: "ciccio"}}],
-    cards: [
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [{image: "https://picsum.photos/100"},{image: "https://picsum.photos/200"}],
-        due: "20 feb 2019"
-      },
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [],
-        due: "20 feb 2019"
-      }
-  ]
-  },{
-    due: "29 feb 2018",
-    note: "process example description",
-    title: "process example",
-    outputs: [{resourceClassifiedAs: {name: "ciccio"}}, {resourceClassifiedAs: {name: "ciccio"}}],
-    cards: [
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [{image: "https://picsum.photos/100"},{image: "https://picsum.photos/200"}],
-        due: "20 feb 2019"
-      },
-      {
-        title: "commitment1",
-        note: "commitment test",
-        members: [],
-        due: "20 feb 2019"
-      }
-  ]
-  }
-]
 
 class Lists extends React.Component {
-  componentDidMount () {
-  }
   render () {
-    const {viewer, loading, error} = this.props.data
-    var kan = document.getElementsByTagName("oce-kanban")
-    for (var i = 0; i < kan.length; i++) {
-      kan[i].style.color = "red";
-    }
-    kan.bins = sde
+    const txs = JSON.stringify([
+      {
+        date: '29 feb 2018',
+        currency: 'BotC',
+        title: 'You received 200 botc shares from Fernando Pessoa',
+        tags: ['beer', 'Saturday night'],
+      },
+      {
+        date: '29 feb 2018',
+        currency: 'CCN',
+        title: 'You received 200 botc shares from Fernando Pessoa',
+        tags: ['beer', 'Saturday night'],
+      },
+      {
+        date: '29 feb 2018',
+        currency: 'FreedomCoop',
+        title: 'You received 200 botc shares from Fernando Pessoa',
+        tags: ['beer', 'Saturday night'],
+      },
+      {
+        date: '29 feb 2018',
+        currency: 'BotC',
+        title: 'You received 200 botc shares from Fernando Pessoa',
+        tags: ['beer', 'Saturday night'],
+      }
+    ])
+    const {loading, error, data} = this.props
     return (
     <AppTemplate>
       {loading ? <strong>Loading...</strong> : (
       error ? <p style={{ color: '#F00' }}>API error</p> : (
-      <div className={style.profile_lists}>
-      <div className={style.lists}>
-        <h2 className={style.profile_title}>👋 Hello {viewer.myAgent.name}</h2>
-        <h5 className={style.profile_address}>ƒ <span>{viewer.myAgent.faircoinAddress}</span></h5>
-        <div className={style.section}>
-          <div className={style.section_wrapper}>
-          <Tabs selectedTabClassName={style.list_active}>
-          <TabList className={style.scope_list}>
-              <Tab>Overview</Tab>
-              <Tab>Feed</Tab>
-          </TabList>
-          <TabPanel>
-            <oce-kanban bins='sde'></oce-kanban>
-            {/* <div className={style.section_wrapper}>
-                <div className={style.wrapper}>
-                    <Card />
-                    <Card />
-                    <Card />
+        <div className={style.App}>
+          <div className={style.assets}>
+            <h5>Your assets</h5>
+            <div className={style.assets_list}>
+              <span>Faircoin</span>
+              <span className={style.list_active}>Shares</span>
+            </div>
+            <h4>Logout</h4>
+          </div>
+          <div className={style.profile}>
+            <div className={style.profile_agent}>
+              <img src='https://picsum.photos/200' />
+              <h2>Bernini</h2>
+            </div>
+            <div className={style.profile_info}>
+              <div className={style.info_data}>
+                <div className={style.data_box}>
+                  <h3>200</h3>
+                  <h5>Balance</h5>
                 </div>
-                <div className={style.section_wrapper}>
-                <div className={style.wrapper_tagline}><h5 className={style.subtitle}>Plans</h5></div>
-                  <div className={style.wrapper}>
-                    {viewer.myAgent.agentPlans.map((plan, i) => (
-                      <div key={i} className={style.lists_item}>
-                        <Link key={plan.id} to={'/canvas/' + plan.id} className={style.link}>
-                          <h4 className={style.item_title}>{plan.name.length === 0 ? plan.planProcesses[0].name : plan.name }</h4>
-                          <h5 className={style.plan_scope}>{plan.scope.map(scope => <span>{scope.name}</span>)}</h5>
-                          <p>{plan.note || ''}</p>
-                        </Link>
-                      </div>
-                    ))}
+                <div className={style.data_box}>
+                  <h3>5</h3>
+                  <h5>Shares</h5>
                 </div>
               </div>
-            </div> */}
-            </TabPanel>
-            <TabPanel>
-              <div className={style.section_wrapper}>
-                <div className={style.wrapper + ' ' + style.wrapper_feed}>
-                  <Feed feed={viewer.myAgent.agentEconomicEvents} />
+              <div className={style.info_list}>
+                <div className={style.list_share}>
+                  <span>120</span>
+                  <h5>FreedomCoop</h5>
+                </div>
+                <div className={style.list_share}>
+                  <span>40</span>
+                  <h5>Bank of the commons</h5>
+                </div>
+                <div className={style.list_share}>
+                  <span>40</span>
+                  <h5>CCN</h5>
                 </div>
               </div>
-            </TabPanel>
-            </Tabs>
+            </div>
+          </div>
+          <div className={style.sendTx_form}>
+            <h5>Send transaction</h5>
+            <oce-sendTx />
+          </div>
+          <div>
+            <oce-txs txs={txs} />
           </div>
         </div>
-        </div>
-      </div>
       ))}
     </AppTemplate>
-  )
-}}
+    )
+  }
+}
 
 const agentPlans = gql`
 query ($token: String) {
